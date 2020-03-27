@@ -153,7 +153,7 @@ def seeart(request, aid):
         #get article selected
         post = articles.objects.get(aid=aid)
         #get poster name
-        user = User.objects.get(id=post.user_id)
+        poster = User.objects.get(id=post.user_id)
         #update likes and comments number for safety
         liked = likes.objects.all().filter(aid_id=aid)
         likesNo = len(liked)
@@ -175,7 +175,7 @@ def seeart(request, aid):
             u_like = False
         #ignore froom (placeholder)
         froom = 'feed'
-        return render(request, 'article/seeart.html', {'user': user, 'post': post, 'liked': len(liked), 'coms': coms, 'u_like': u_like, 'froom':froom})
+        return render(request, 'article/seeart.html', {'poster': poster, 'post': post, 'liked': len(liked), 'coms': coms, 'u_like': u_like, 'froom':froom})
     else:
         messages.error(request, 'You have to be logged in for this action !')
         return HttpResponseRedirect('/logreg/login/')
