@@ -25,7 +25,7 @@ class UserBackend(ModelBackend):
                     return 'Wrong user or password'
             #if user not fetched user does not exist
             except users.DoesNotExist:
-                return 'Wrong does not exist'
+                return 'User does not exist'
         #the same applies below
         else:
             try:

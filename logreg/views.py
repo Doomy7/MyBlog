@@ -23,8 +23,15 @@ def logindex(request):
             password = request.POST['password']
             user = UserBackend.authenticate(request, username=username, password=password)
             if user is not None:
+                print(user)
                 if user == 'Wrong user or password':
                     messages.error(request, 'Wrong user or password')
+                    return redirect('/logreg/login/')
+                elif user == 'User does not exist':
+                    messages.error(request, 'User does not exist')
+                    return redirect('/logreg/login/')
+                elif user == 'User blocked':
+                    messages.error(request, 'User blocked')
                     return redirect('/logreg/login/')
                 else:
                     messages.success(request, 'Welcome ' + user.username)
