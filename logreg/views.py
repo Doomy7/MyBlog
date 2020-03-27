@@ -23,7 +23,6 @@ def logindex(request):
             password = request.POST['password']
             user = UserBackend.authenticate(request, username=username, password=password)
             if user is not None:
-                print(user)
                 if user == 'Wrong user or password':
                     messages.error(request, 'Wrong user or password')
                     return redirect('/logreg/login/')
@@ -110,6 +109,11 @@ def feed(request):
     if request.user.is_authenticated:
         #pass all posts as input
         posts = articles.objects.all()
+        posters = []
+        # get poster name
+        for post in posts:
+            # get poster name
+            post.user_id = User.objects.get(id=post.user_id).username
         return render(request, 'article/feed.html', {'posts': posts})
     else:
         messages.error(request, 'You have to be logged in for this action !')
