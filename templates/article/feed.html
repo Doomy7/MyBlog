@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+<title>New article</title>
+{% endblock %}
+{% block content %}
+    <div class="card text-center">
+        <div class="card-body">
+            <h1>Recent Feed</h1>
+<!--    if message display        -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+<!--    display all posts with poster name and like/comment number       -->
+            {% for post in posts %}
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h4><a href="../seeart/{{post.aid}}">{{post.title}}</a></h4>
+                        <h6>Posted by: {{data.username}}</h6>
+                        <h6>Categories: {{post.category}}</h6>
+                        <h6>Likes: {{post.likesNo}} Comments: {{post.commentsNo}}</h6>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

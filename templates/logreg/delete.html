@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+<title>Login</title>
+{% endblock %}
+{% block content %}
+    <div class="card text-center">
+        <div class="card-body">
+            <h1>DELETE ACCOUNT</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+            <a class="btn btn-danger" href="goodbye">
+                YES
+            </a>
+            <a class="btn btn-success" href="../">
+                NO
+            </a>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>MyBlog Main</title>
+{% endblock %}
+
+{% block content %}
+    <div class="card text-center">
+        <div class="card-body">
+            {% if messages %}
+            {{message}}
+            {% endif %}
+
+                <h1>Welcome to blogApp</h1>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success">{{message}}</div>
+                    {% endfor %}
+                {% endif %}
+                <a class="btn btn-dark" href="{% url 'logreg:logindex' %}">
+                    Log In
+                </a>
+                <a class="btn btn-dark" href="{% url 'logreg:regindex' %}">
+                    Register
+                </a>
+                <a class="btn btn-dark" href="admin/">
+                    Admin
+                </a>
+        </div>
+    </div>
+{% endblock %}

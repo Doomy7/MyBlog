@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>{{data.username}}'s Profile</title>
+{% endblock %}
+
+{% block content %}
+<!--Two buttons for app entry-->
+
+    <div class="card text-center">
+        <div class="card-body">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+            <h1>My Details</h1>
+<!--            display user details -->
+            <table class="table table-dark table-striped">
+                <tbody>
+                  <tr>
+                    <td>Username</td>
+                    <td> {{data.username}}</td>
+                  </tr>
+                  <tr>
+                    <td>Email</td>
+                    <td> {{data.email}}</td>
+                  </tr>
+                  <tr>
+                    <td>Phone</td>
+                    <td>{{data.phone}}</td>
+                  </tr>
+                  <tr>
+                    <td>Date Of Birth</td>
+                    <td>{{data.dob}}</td>
+                  </tr>
+                  <tr>
+                    <td>Interests</td>
+                    <td> {{data.interests}} </td>
+                  </tr>
+                  <tr>
+                    <td>Bio</td>
+                    <td>{{data.bio}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <a class="btn btn-danger" href="delete/">
+                Delete Account
+            </a>
+        </div>
+    </div>
+    <br>
+<!--quick access to user's own posts -->
+    <div class="card text-center">
+        <div class="card-body">
+            <h1>My Posts</h1>
+            <div class="card text-center">
+                <div class="card-body">
+                    {% for post in posts %}
+                        <a href="{% url 'logreg:seeart' post.aid %}">{{post.title}}</a> Likes: {{post.likesNo}}, Comments: {{post.commentsNo}}<br>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            <a class="btn btn-primary" href="{% url 'logreg:regart' %}">
+                New Post
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+<title>New article</title>
+{% endblock %}
+{% block content %}
+    <div class="card text-center">
+        <div class="card-body">
+<!--if message display-->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+<!--    print post tile username category details like/comment number        -->
+            <h1>{{post.title}}</h1>
+            <h5>Posted by: {{user.username}}</h5>
+            <h5>Categories: {{post.category}}</h5>
+            <div class="card text-center">{{post.details}}</div>
+            <h6>Likes: {{post.likesNo}} Comments: {{post.commentsNo}}</h6>
+<!--    based on u_like ->button is like/dislike        -->
+            {% if not u_like %}
+                <form action='/logreg/seeart/like/{{post.aid}}/{{request.user.id}}' method="POST">
+                    {% csrf_token %}
+                    <input class="btn btn-info" type="submit" name="submit" value="Like">
+                </form>
+            {% else %}
+                <form action='/logreg/seeart/dislike/{{post.aid}}/{{request.user.id}}' method="POST">
+                    {% csrf_token %}
+                    <input class="btn btn-info" type="submit" name="submit" value="Dislike">
+                </form>
+            {% endif %}
+        </div>
+<!--   print post comments user comment poster attached     -->
+        <div class="card-body">
+            <h3>Comments</h3>
+            {% for com in coms %}
+                <div class="card text-center">{{com}}</div>
+            {% endfor %}
+<!--     comment post form       -->
+            <form action='/logreg/seeart/comment/{{post.aid}}/{{request.user.id}}' method="POST">
+                {% csrf_token %}
+                {{form|crispy}}
+                <input type="text" name="comment" required>
+                <input class="btn btn-success" type="submit" name="submit" value="Post">
+            </form>
+            {% if froom %}
+                <a class="btn btn-dark" href="/logreg/feed">
+                    Back
+                </a>
+            {% else %}
+                <a class="btn btn-dark" href="/logreg/profile">
+                    Back
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
