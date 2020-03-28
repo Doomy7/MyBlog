@@ -15,8 +15,13 @@
             <form action="{%url 'logreg:regindex' %}" method="POST">
                 {% csrf_token %}
                 {{form|crispy}}
-                <input type="submit" name="submit" value="Submit">
+                <small id="hint_id_password1" class="form-text text-muted">
+                    <li>Maximun of 200 characters.</li>
+                </small>
+                <br>
+                <input class="btn btn-success" type="submit" name="submit" value="Submit">
             </form>
+            <br>
             <a class="btn btn-dark" href="/">
                 Back
             </a>

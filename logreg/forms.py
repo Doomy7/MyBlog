@@ -4,8 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 #custom user registration form, extendes existed form
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(max_length=30)
-    password1 = forms.CharField(max_length=100, widget=forms.PasswordInput)
-    password2 = forms.CharField(max_length=100, widget=forms.PasswordInput)
     email = forms.EmailField()
     Date_of_birth = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
     phone = forms.IntegerField(max_value=6999999999)
