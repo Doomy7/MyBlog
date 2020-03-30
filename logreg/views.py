@@ -77,7 +77,7 @@ def regindex(request):
             if movies: interests += ('Movies/')
 
             # insert new user in auth users
-            user = User(id=users.objects.get(username=username).id, username=username, email=email)
+            user = User(username=username, email=email)
             # is not stuff or superuser. only admin can change this
             user.is_staff = False
             user.is_superuser = False
