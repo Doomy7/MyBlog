@@ -75,15 +75,18 @@ def regindex(request):
             if games: interests += ('Games/')
             if arts: interests += ('Arts/')
             if movies: interests += ('Movies/')
-            #create new user in users
-            new_user = users(username=username, email=email, password=password, dob=dob, phone=phone, interests=interests[:-1], bio=bio)
-            new_user.save()
-            #insert new user in auth users
-            user = User(id=users.objects.get(username=username).id,username=username, email=email)
-            #is not stuff or superuser. only admin can change this
+
+            # insert new user in auth users
+            user = User(id=users.objects.get(username=username).id, username=username, email=email)
+            # is not stuff or superuser. only admin can change this
             user.is_staff = False
             user.is_superuser = False
             user.save()
+
+            #create new user in users
+            new_user = users(id=users.objects.get(username=username).id, username=username, email=email, password=password, dob=dob, phone=phone, interests=interests[:-1], bio=bio)
+            new_user.save()
+
             messages.success(request, "User: " + username + " registered successfully !")
             return redirect("/")
         else:
