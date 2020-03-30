@@ -84,7 +84,7 @@ def regindex(request):
             user.save()
 
             #create new user in users
-            new_user = users(id=users.objects.get(username=username).id, username=username, email=email, password=password, dob=dob, phone=phone, interests=interests[:-1], bio=bio)
+            new_user = users(id=User.objects.get(username=username).id, username=username, email=email, password=password, dob=dob, phone=phone, interests=interests[:-1], bio=bio)
             new_user.save()
 
             messages.success(request, "User: " + username + " registered successfully !")
